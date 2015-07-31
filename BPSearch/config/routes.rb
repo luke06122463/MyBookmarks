@@ -71,6 +71,5 @@ Rails.application.routes.draw do
       end
     end
     
-    root "dashboards#index"
   end
 end
