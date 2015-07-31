@@ -1,0 +1,104 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Bookmark Search Manager</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="/bsm/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/bsm/lib/flat-ui/dist/css/flat-ui.css" />
+    <!--<link rel="stylesheet" href="/bsm/styles/flat-ui.css">-->
+    <link rel="stylesheet" href="/bsm/styles/admin.css">
+  </head>
+  <body ng-app="bsm.gui" ng-controller="AdminController" ng-style="{'background-color': website.css.color}">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">BookMark Search</a>
+        </div>
+
+        <div role="search" class="bsm-search" ng-if="website.layout.showNavigationItem">
+          <form method="GET" action="/search" class="bsm-search-form form-with-magnify">
+            <input type="text" class="bsm-search-input" id="q" name="q" autocomplete="off" value="" placeholder="Search for bookmark" aria-haspopup="true">
+          </form>
+          <button class="btn btn-large btn-block btn-primary bsm-add-bookmark">&nbsp New &nbsp</button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav" style="margin-left:28px" ng-if="website.layout.showNavigationItem">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">History</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li ng-if="website.layout.showRegisterItem"><a href="#">
+              <span class="glyphicon glyphicon-user"></span> Sign Up
+            </a></li>
+            <li ng-if="website.layout.showLoginItem"><a href="#/login">
+              <span class="glyphicon glyphicon-log-in"></span> Login
+            </a></li>
+            <li class="dropdown" ng-if="website.layout.showUserProfileMenu">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <img style="margin-right:5px" src="http://pic3.zhimg.com/ea2667b62_s.jpg" srcset="http://pic3.zhimg.com/ea2667b62_xs.jpg 2x">
+                {{website.user.name}}
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Preference</a></li>
+                <li><a href="#">My Setting</a></li>
+                <li><a href="#/login">Logout</a></li> 
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="main-container">
+        <div >
+            <main ui-view>
+               <div class="admin-view" ng-view=""></div>
+            </main>
+        </div>
+    </div> 
+</div>
+
+  <script src="/bsm/lib/jquery/dist/jquery.js"></script>
+  <script src="/bsm/lib/angular/angular.js"></script>
+  <script src="/bsm/lib/angular-resource/angular-resource.js"></script>
+  <script src="/bsm/lib/angular-route/angular-route.js"></script>
+  <script src="/bsm/lib/angular-touch/angular-touch.js"></script>
+  <script src="/bsm/lib/angular-sanitize/angular-sanitize.js"></script>  
+  <script src="/bsm/lib/angular-cache/dist/angular-cache.js"></script>
+  <script src="/bsm/lib/emc-angular-utils/release/emc-angular-utils.js"></script>
+  <script src="/bsm/lib/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/bsm/lib/eventEmitter/EventEmitter.js"></script>
+  <script src="/bsm/lib/i18next/i18next.js"></script>
+  <script src="/bsm/lib/ng-i18next/dist/ng-i18next.js"></script>
+
+  <!-- Resource -->
+  <script src="/bsm/script/url.js"></script>
+  <script src="/bsm/script/i18nextConfig.js"></script>
+
+  <!-- Module -->
+  <script src="/bsm/script/app.js"></script>
+  <script src="/bsm/script/bsmLogin.js"></script>
+  <script src="/bsm/script/bsmProvider.js"></script>
+  <script src="/bsm/script/bsmService.js"></script>
+
+  <!-- Service -->
+  <script src="/bsm/script/services/loginService.js"></script>
+  <script src="/bsm/script/services/remoteProxyService.js"></script>
+  <script src="/bsm/script/services/userService.js"></script>
+  <script src="/bsm/script/services/locationService.js"></script>
+
+   <!-- Provider -->
+  <script src="/bsm/script/services/urlProvider.js"></script>
+
+   <!-- Controller -->
+  <script src="/bsm/script/controller/adminController.js"></script>
+  <script src="/bsm/script/controller/auth/loginController.js"></script>
+
+   <!-- utilities -->
+  <script src="/bsm/script/utilities/loginTemplate.js"></script>
+</html>

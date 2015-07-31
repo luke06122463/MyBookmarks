@@ -53,4 +53,24 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  scope '(:locale)' do
+    get 'help/index' => 'help#index'
+    get 'version' => 'help#version'
+     
+    get 'user/search_ldap_user' => 'user#search_ldap_user'
+    get 'auth/login' => 'auth#login'
+    post 'auth/prologin' => 'auth#prologin'
+    get 'auth/logout' => 'auth#logout'
+    post 'auth/check_session_timeout' => 'auth#check_session_timeout'
+    post 'auth/check_authentication' => 'auth#check_authentication'
+
+    resources :activities do
+      member do
+        #get 'entities_json'
+        get 'do_operation'
+      end
+    end
+    
+    root "dashboards#index"
+  end
 end
