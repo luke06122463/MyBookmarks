@@ -64,12 +64,14 @@ Rails.application.routes.draw do
     post 'auth/check_session_timeout' => 'auth#check_session_timeout'
     post 'auth/check_authentication' => 'auth#check_authentication'
 
-    resources :activities do
+    get 'bookmarks/test_insert' => 'bookmarks#test_insert'
+    get 'bookmarks/test_query' => 'bookmarks#test_query'
+    resources :bookmarks do
       member do
-        #get 'entities_json'
-        get 'do_operation'
+        #TODO: Add some operations route here for options 
       end
     end
     
+    root "bookmarks#index"
   end
 end

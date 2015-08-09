@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="/bsm/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="/bsm/lib/flat-ui/dist/css/flat-ui.css" />
+    <link rel="stylesheet" href="/bsm/lib/Font-Awesome/css/font-awesome.css" />
     <!--<link rel="stylesheet" href="/bsm/styles/flat-ui.css">-->
     <link rel="stylesheet" href="/bsm/styles/admin.css">
   </head>
@@ -27,7 +28,7 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav" style="margin-left:28px" ng-if="website.layout.showNavigationItem">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="#/">Home</a></li>
             <li><a href="#">History</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -38,14 +39,14 @@
               <span class="glyphicon glyphicon-log-in"></span> Login
             </a></li>
             <li class="dropdown" ng-if="website.layout.showUserProfileMenu">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <img style="margin-right:5px" src="http://pic3.zhimg.com/ea2667b62_s.jpg" srcset="http://pic3.zhimg.com/ea2667b62_xs.jpg 2x">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                <img style="margin-right:5px" src="/bsm/images/profile_001.jpg">
                 {{website.user.name}}
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#">Preference</a></li>
-                <li><a href="#">My Setting</a></li>
+                <li><a href="#/">Preference</a></li>
+                <li><a href="#/">My Setting</a></li>
                 <li><a href="#/login">Logout</a></li> 
               </ul>
             </li>
@@ -76,6 +77,11 @@
   <script src="/bsm/lib/i18next/i18next.js"></script>
   <script src="/bsm/lib/ng-i18next/dist/ng-i18next.js"></script>
 
+  <script src="/bsm/lib/masonry/dist/masonry.pkgd.js"></script>
+  <script src="/bsm/lib/jquery-bridget/jquery.bridget.js"></script>
+  <script src="/bsm/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+  <script src="/bsm/lib/angular-masonry/src/angular-masonry.js"></script>
+
   <!-- Resource -->
   <script src="/bsm/script/url.js"></script>
   <script src="/bsm/script/i18nextConfig.js"></script>
@@ -98,6 +104,7 @@
    <!-- Controller -->
   <script src="/bsm/script/controller/adminController.js"></script>
   <script src="/bsm/script/controller/auth/loginController.js"></script>
+  <script src="/bsm/script/controller/bookmarks/bookmarksController.js"></script>
 
    <!-- utilities -->
   <script src="/bsm/script/utilities/loginTemplate.js"></script>

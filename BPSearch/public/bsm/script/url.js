@@ -24,4 +24,13 @@ var url_map = {
 			"faked":{"url":"/admin/sample/result.json", "action":"get"}
 		},
 	},
+	"bookmarks": {
+		"getBookmarks":{
+			"product":{
+				"url":"bookmarks",
+				"action":"get"
+			}, 
+			"faked":{"url":"/admin/sample/result.json", "action":"get"}
+		}
+	}
 };

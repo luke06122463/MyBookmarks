@@ -16,6 +16,10 @@ class AuthController < ApplicationController
     uname.strip!
 
     @rest_client = Client::Rest_Client.new nil
+    
+    sHelper = SessionHelper::Session.new @rest_client,session, request
+    # clear session content rather that session itself. Otherwise, the CSRF will be changed
+    sHelper.clearSessionContent
 
     puts "The logon info: username [" + uname +"] attempt to logon"
     if (uname=="")
@@ -30,8 +34,6 @@ class AuthController < ApplicationController
   		parameters = { :username => uname,:password => upass}
 
       result = @rest_client.request_deliver(USER_AUTHENTICATION_URL, parameters)
-
-      puts result.to_s
 
       if(result[:authenticated])
 
@@ -53,6 +55,9 @@ class AuthController < ApplicationController
   	    session[:user_id]=login_result[:login_data][:user_id]
   	    session[:user_logon_name]=login_result[:login_data][:user_logon_name]
   	    session[:user_roles]=login_result[:login_data][:user_roles]
+
+        # set the default value for session item. ip, last_active_time, browser_signature
+        sHelper.setDefaultVaule
       end
     end
     render :json => login_result
@@ -60,14 +65,18 @@ class AuthController < ApplicationController
   
   def logout
     puts "user logout"
+
+    session.clear
    
     render :json => {:logout_flag => true}
   end
 
   def check_authentication
     puts "check authentication"
+    @rest_client = Client::Rest_Client.new nil
+    sHelper = SessionHelper::Session.new @rest_client, session, request
     # todo: check whether the token has been expired
-    if !session[:user_id].nil?
+    if sHelper.check_session && sHelper.check_session_not_empty
       render :json => {
         :has_login => true, 
         :login_data => {

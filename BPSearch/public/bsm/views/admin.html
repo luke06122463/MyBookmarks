@@ -1,1 +1,7 @@
-<p>This is the admin view.</p>
+<div masonry>
+    <div class="masonry-brick"  ng-repeat="bookmark in bookmarks">
+	        <h3>{{bookmark.title}}</h3>
+			<p style="line-height:1.5;font-size:16px">{{bookmark.summary}}</p>
+			<p><a class="btn btn-primary buttonPadding" href="#">Open</a> <a class="btn modifyBtn noPadding" href="#">Modify</a></p>
+    </div>
+</div>

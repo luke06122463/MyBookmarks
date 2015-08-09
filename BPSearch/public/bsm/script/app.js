@@ -9,12 +9,14 @@ angular
     'jm.i18next',
     'bsm.login',
     'bsm.service',
-    'bsm.provider'
+    'bsm.provider',
+    'wu.masonry'
   ])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider      
       .when('/', {
-        templateUrl: '/bsm/views/admin.html'
+        templateUrl: '/bsm/views/admin.html',
+        controller: 'BookmarksController'
       })
       .when('/login', {
         templateUrl: 'bsm.login.login-flatUiPage.html',//,'bsm.login.login-loginPage.html'
