@@ -35,3 +35,5 @@ Here is brief list of its features.
 > Ideally, I want to provide search functionality for the whole website. User can search the specific bookmark according to the keywords he inputs.
 
 + Support for multiple bookmarks
+
+See more in **wiki**
