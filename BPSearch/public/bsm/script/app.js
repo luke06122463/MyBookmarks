@@ -21,6 +21,9 @@ angular
       .when('/login', {
         templateUrl: 'bsm.login.login-flatUiPage.html',//,'bsm.login.login-loginPage.html'
         controller: 'LoginController'//'AdminController'
+      }) 
+      .when('/register', {
+        templateUrl: 'bsm.login.register-flatUiPage.html'
       })      
       .when('/home', {
         templateUrl: '/bsm/views/admin.html'
@@ -69,6 +72,9 @@ angular
           if(node.originalPath == '/login'){
             //do nothing. show the login page for the user to login
             console.log("APP:: Do nothing, for user wants to visit login page");
+          }else if(node.originalPath == '/register'){
+            //do nothing. show the login page for the user to login
+            console.log("APP:: Do nothing, for user wants to visit register page");
           }else if(!userService.isUserInitialized()){
             /* Check whether user has logged in or not. If user has loggin in then redirect him to where he wants to go. Otherwise, go to login page
              *  So the scenario for this case are following

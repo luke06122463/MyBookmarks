@@ -15,7 +15,12 @@ class AuthController < ApplicationController
     # strip blank for user name
     uname.strip!
 
-    @rest_client = Client::Rest_Client.new nil
+    # disable API
+    #@rest_client = Client::Rest_Client.new nil
+
+    # enable local call
+    Mongo::Logger.level = ::Logger::INFO
+    @client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'bsm_002')
     
     sHelper = SessionHelper::Session.new @rest_client,session, request
     # clear session content rather that session itself. Otherwise, the CSRF will be changed
@@ -33,19 +38,27 @@ class AuthController < ApplicationController
   		puts "try to logon admin web"
   		parameters = { :username => uname,:password => upass}
 
-      result = @rest_client.request_deliver(USER_AUTHENTICATION_URL, parameters)
+      # disable API
+      #result = @rest_client.request_deliver(USER_AUTHENTICATION_URL, parameters)
 
-      if(result[:authenticated])
+      # enable local call
+      result = nil
+      @client[:users].find({:name => uname, :password=>upass}).each do |document|
+        result = document#.to_json
+        puts "document: #{result.to_s}"
+      end
+
+      if(!result.nil?)
 
     		login_result[:login_notice] = "logon is successfull"
     		login_result[:login_flag] = true
   	    login_result[:login_data] = {
-  	      :user_name => result[:user_name],
-  	      :first_name => result[:first_name],
-  	      :last_name => result[:last_name],
-  	      :user_id => result[:user_id],
-  	      :user_logon_name => result[:user_logon_name],
-  	      :user_roles => result[:user_roles]
+  	      :user_name => result["display"],
+  	      :first_name => '',#rresult[:first_name],
+  	      :last_name => '',#rresult[:last_name],
+  	      :user_id => result["_id"],
+  	      :user_logon_name => result["name"],
+  	      :user_roles => '',#rresult[:user_roles]
   	    }
 
   	    # store the userid into session for web validation
@@ -94,4 +107,28 @@ class AuthController < ApplicationController
       }
     end
   end
+
+  def initDB
+    Mongo::Logger.level = ::Logger::INFO
+    @client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'bsm_002')
+
+    # init users collection
+    result = @client[:users].insert_many([
+      { :name => 'luke', :password=> "bsm", :display=> "Luke Lu"},
+      { :name => 'daisy', :password=> "bsm", :display=>"Daisy Reb"}
+    ])
+    t1 = result.n
+
+    # init bookmark collection
+    result = @client[:bookmarks].insert_many([
+      {:title=>'ng-repeat的性能问题', :url => 'http://www.mamicode.com/info-detail-504104.html', :summary=>'(十三)通过DOM事件DOMNodeRemoved，看ng-repeat的性能问题以及track by的作用'},
+      {:title=>'Oledata.mso attachment', :url => 'https://support.microsoft.com/en-us/kb/222330', :summary=>'You see a file with the extension of.wmz when you receive a message with Oledata.mso attachment'},
+      {:title=>'How to Open Oledata.Mso Files', :url => 'http://www.ehow.com/how_6553901_open-oledata_mso-files.html', :summary=>'Oledata.Mso computer files are specifically formatted files relating to an attachment that is sent via email using Microsoft Outlook.'},
+      {:title=>'Office & Productivity Software forum', :url => 'http://www.cnet.com/forums/discussions/what-are-oledata-mso-files-12465/', :summary=>'What are oledata.mso files?'},
+      {:title=>'$watch How the $apply Runs a $digest', :url => 'http://angular-tips.com/blog/2013/08/watch-how-the-apply-runs-a-digest/', :summary=>'Angular users want to know how data-binding works. There is a lot of vocabulary around this: $watch, $apply, $digest, dirty-checking… What are they and how do they work?'},
+      {:title=>'vertical-align in table cells', :url => 'http://phrogz.net/CSS/vertical-align/index.html', :summary=>'When used in table cells, vertical-align does what most people expect it to, which is mimic the (old, deprecated) valign attribute. '}
+    ])
+    t2 = result.n
+    render :json => {:ret1=>t1, :ret2=>t2}
+  end 
 end

@@ -62,6 +62,7 @@ bsmApp.controller('AdminController', [
 	        		console.log("AdminController:: user has not logged in. redirect him to login page");
 		            userService.setUser(false, {});
 		            locationService.path('/login');
+					$scope.website.css.color= '#515151'; //white
 		        }
 	        }
 		};
@@ -98,6 +99,12 @@ bsmApp.controller('AdminController', [
 			}
 
 		});
+
+		$scope.logout = function(){
+			loginService.doLogout();
+			locationService.path('/login');
+			$scope.website.css.color= '#515151'; //white
+		}
 
 	}
 ]);

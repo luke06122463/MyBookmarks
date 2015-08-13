@@ -1,14 +1,19 @@
 require 'json'
 require 'constants'
-#require 'mongo'
+require 'mongo'
 require 'util/fake_client'
 
 class BookmarksController < ApplicationController
   def index
-    bookmarks = @rest_client.request_deliver(BOOKMARK_URL,nil)
-    render :json=> bookmarks
+    #bookmarks = @rest_client.request_deliver(BOOKMARK_URL,nil)
+    bookmarks = Array.new
+    @client[:bookmarks].find().each do |document|
+      bookmarks << document#.to_json
+      puts "document: #{document.to_s}"
+    end
+    render :json=> {:success=>true, :result=>bookmarks}
   end
-=begin
+
   def test_insert
   	Mongo::Logger.level = ::Logger::INFO
   	client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'music')
@@ -26,8 +31,16 @@ class BookmarksController < ApplicationController
   end
 
   def test_query
-  	client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'music')
-  	count = client[:artists].find
+    uname=params[:username]
+    upsw=params[:password]
+    puts "username is #{uname}"
+    result = {:user_id=>nil}
+  	count = @client[:users].find({:name => uname, :password=>upsw}).each do |document|
+      #=> Yields a BSON::Document.
+      result[:user_id] = document["_id"]
+      puts "document: #{document.to_s}"
+    end
+    render :json=>result
   end
-=end
+
 end

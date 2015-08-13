@@ -77,7 +77,7 @@ angular.module('bsm.login.templates', []).run([
         loginEnd: '</div>'
     };
 
-    var flatUITemp = ''
+    var flatUILoginTemp = ''
         +'<div class="bsm-login-container">'
           +'<div class="login-form">'
             +'<div class="control-group">'
@@ -93,6 +93,26 @@ angular.module('bsm.login.templates', []).run([
           +'</div>'
         +'</div>';
 
+    var flatUIRegisterTemp = ''
+        +'<div class="bsm-login-container">'
+          +'<div class="login-form">'
+            +'<div class="control-group">'
+              +'<input type="text" class="bsm-login-field" value="" placeholder="Enter your name" id="login-name" ng-model="username">'
+              +'<label class="login-field-icon fui-user" for="login-name"></label>'
+            +'</div>'
+            +'<div class="control-group">'
+              +'<input type="password" class="bsm-login-field" value="" placeholder="Password" id="login-pass" ng-model="password">'
+              +'<label class="login-field-icon fui-lock" for="login-pass"></label>'
+            +'</div>'
+            +'<div class="control-group">'
+              +'<input type="password" class="bsm-login-field" value="" placeholder="Confirm Password" id="login-pass" ng-model="confirmPwd">'
+              +'<label class="login-field-icon fui-lock" for="login-pass"></label>'
+            +'</div>'
+            +'<a class="btn btn-primary btn-large btn-block" href  ng-click="handleLoginBtn()">Register</a>'
+            +'<a class="login-link" href="#/login" style="text-decoration: underline">Already have an account?</a>'
+          +'</div>'
+        +'</div>';
+
     $templateCache.put('bsm.login.login-loginModal.html', ''
         + reLoginTemp.loginBackdrop + reLoginTemp.loginBegin + reLoginTemp.loginHeader 
         + reLoginTemp.loginErrorArea + reLoginTemp.loginFormWrapOpen + reLoginTemp.loginTemplate 
@@ -103,6 +123,7 @@ angular.module('bsm.login.templates', []).run([
         + loginTemp.loginTemplate +  loginTemp.loginFeedback 
         + loginTemp.loginButtons + loginTemp.loginFormWrapClose + loginTemp.loginLoading + loginTemp.loginTemplateClose);
 
-    $templateCache.put('bsm.login.login-flatUiPage.html',flatUITemp);
+    $templateCache.put('bsm.login.login-flatUiPage.html',flatUILoginTemp);
+    $templateCache.put('bsm.login.register-flatUiPage.html',flatUIRegisterTemp);
   }
 ]);
