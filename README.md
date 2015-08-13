@@ -36,4 +36,4 @@ Here is brief list of its features.
 
 + Support for multiple bookmarks
 
-See more in **wiki**
+See more in [wiki](https://github.com/luke06122463/MyBookmarks/wiki)
