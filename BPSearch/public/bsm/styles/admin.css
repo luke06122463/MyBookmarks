@@ -1,3 +1,12 @@
+/* overwrite bootstrap's css */
+textarea:focus,
+.uneditable-input:focus {   
+  border-color: rgba(126, 239, 104, 0.8);
+  box-shadow: none !important;/*0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);*/
+  outline: 0 none;
+}
+
+/* self-define css*/
 .admin-view{
   width: 100%;
 }
@@ -166,6 +175,7 @@ form{
   height:394px;
 }
 
+/* masonry style */
 .grid-item { 
   width: 22%; 
   float: left;
@@ -200,4 +210,92 @@ h1, h2, h3{
 
 .modifyBtn:hover{
   color:#006666;
+}
+
+/* bookmark creation dialog */
+.modal-dialog-bg{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 95;
+    min-height: 100%!important;
+    width: 100%!important;
+    height: 100%!important;
+    overflow: visible;
+    background: #666;
+}
+
+.modal{
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    z-index: 1050;
+    width: 560px;
+    margin-left: -280px;
+    background-color: #ffffff;
+    border: 1px solid #999;
+    border: 1px solid #009966;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 7px #009966;
+    -moz-box-shadow: 0 3px 7px #009966;
+    box-shadow: 0 3px 7px #009966;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+    outline: none;
+    bottom: auto;
+}
+
+.modal-dialog-title{
+    position: relative;
+    background-color: #1abc9c;
+    background-repeat: repeat-x;
+    padding: 10px 15px;
+    border-radius: 6px 6px 0 0;
+    border: 1px solid #00FFFF;    
+    margin: -1px -1px 0;
+    line-height: 14px;
+}
+
+.modal-dialog-title-text {
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 25px;
+}
+
+.modal-form-text-input {
+    padding: 8px 10px;
+    font-size: 13px;
+    line-height: 15px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1) inset;
+    border-radius: 3px;
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #222;
+}
+.modal-textarea{
+    vertical-align: bottom;
+    color: #222;
+    overflow: hidden;
+    line-height: 22px;
+    font-size: 13px;
+    padding: 0!important;
+    margin: 0!important;
+    border: 0 none;
+    width: 100%;
+    font-weight: 400;
+    resize:none;
+}
+.modal-footer {
+    padding: 0 25px 15px 25px;
+    text-align: right;
+    border:none;
+}
+
+.modal-wrapper{
+
 }

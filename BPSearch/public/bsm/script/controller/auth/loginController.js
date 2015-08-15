@@ -105,8 +105,8 @@ angular.module('bsm.login').controller('LoginController', [
     // LOGOUT
     // ---------------------
     /**
-             * Simply sets the user as not logged in.
-             */
+     * Simply sets the user as not logged in.
+     */
     var handleLogoutSuccess = function () {
       userService.clearUser();
       $scope.result.loginSuccess = false;

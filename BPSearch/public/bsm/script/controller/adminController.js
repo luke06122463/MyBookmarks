@@ -9,7 +9,9 @@ bsmApp.controller('AdminController', [
 	'LoginService',
 	'UserService',
 	'AUTH_EVENTS',
-	function($scope, $route, $rootScope, locationService, loginService, userService, AUTH_EVENTS){
+	'RemoteProxy',
+	'RemoteUrl', 
+	function($scope, $route, $rootScope, locationService, loginService, userService, AUTH_EVENTS, remoteProxyService, remoteUrlProvider){
 		console.log("step into AdminController");
 		//init css for the whole website
 		$scope.website = {
@@ -24,6 +26,11 @@ bsmApp.controller('AdminController', [
 			},
 			user: {
 				name: ''
+			},
+			newBookmark: {
+				title: '',
+				summary: '',
+				url: ''
 			}
 		};
 		$rootScope.$on(AUTH_EVENTS.USER_AUTHENTICATION, function(event, args){
@@ -104,6 +111,22 @@ bsmApp.controller('AdminController', [
 			loginService.doLogout();
 			locationService.path('/login');
 			$scope.website.css.color= '#515151'; //white
+		}
+
+		$scope.createNewBookmark = function(){
+			console.log($scope.website.newBookmark);
+			var urlObj = remoteUrlProvider.getUrl("bookmarks.createBookmarks", false);
+			remoteProxyService[urlObj.action]({
+		    	"url": urlObj.url, 
+		    	"request": $scope.website.newBookmark,
+		    	//"response": getSourceResponse, 
+		    	"success": function(data){
+		    		console.log(data);
+		    		$scope.website.newBookmark.title = '';
+		    		$scope.website.newBookmark.summary = '';
+		    		$scope.website.newBookmark.url = '';
+		    	}
+		    });
 		}
 
 	}

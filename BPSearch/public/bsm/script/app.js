@@ -78,7 +78,7 @@ angular
           }else if(!userService.isUserInitialized()){
             /* Check whether user has logged in or not. If user has loggin in then redirect him to where he wants to go. Otherwise, go to login page
              *  So the scenario for this case are following
-             *  1. access the page by specifing the url, eg. http://localhost/admin, http://localhost/admin#/option
+             *  1. access the page by specifing the url, eg. http://localhost/bsm, http://localhost/bsm#/search
              *  2. refresh the page, eg. F5 or clear the browser
              */
             console.log("APP:: try to broadcast the Authentication Event since user has not logged in yet");

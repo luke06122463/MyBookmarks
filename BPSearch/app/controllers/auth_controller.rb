@@ -84,6 +84,7 @@ class AuthController < ApplicationController
     render :json => {:logout_flag => true}
   end
 
+  #check whether user has been logged in
   def check_authentication
     puts "check authentication"
     @rest_client = Client::Rest_Client.new nil
@@ -108,7 +109,9 @@ class AuthController < ApplicationController
     end
   end
 
-  def initDB
+  # TODO: remove this part when the code is ready
+  # used for initializing mongodb so that we can show something to user when the bookmark insert/import functionality is not ready 
+  def init_db
     Mongo::Logger.level = ::Logger::INFO
     @client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'bsm_002')
 

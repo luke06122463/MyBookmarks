@@ -14,6 +14,22 @@ class BookmarksController < ApplicationController
     render :json=> {:success=>true, :result=>bookmarks}
   end
 
+  def new
+    flag = true
+    newBookmark = {
+      :title => params[:title], 
+      :url => params[:url], 
+      :summary => params[:summary]
+    }
+#=begin
+    result = @client[:bookmarks].insert_one(newBookmark)
+    if(result.n != 1)
+      flag = false
+    end
+#=end
+    render :json => {:success => flag}
+  end
+
   def test_insert
   	Mongo::Logger.level = ::Logger::INFO
   	client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'music')

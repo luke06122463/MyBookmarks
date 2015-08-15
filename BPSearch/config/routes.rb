@@ -63,10 +63,11 @@ Rails.application.routes.draw do
     get 'auth/logout' => 'auth#logout'
     post 'auth/check_session_timeout' => 'auth#check_session_timeout'
     post 'auth/check_authentication' => 'auth#check_authentication'
-    get 'auth/initDB' => 'auth#initDB'
+    get 'auth/init_db' => 'auth#init_db'
 
     get 'bookmarks/test_insert' => 'bookmarks#test_insert'
     get 'bookmarks/test_query' => 'bookmarks#test_query'
+    post 'bookmarks/new' => 'bookmarks#new'
     resources :bookmarks do
       member do
         #TODO: Add some operations route here for options 
